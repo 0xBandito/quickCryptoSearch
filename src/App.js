@@ -9,9 +9,9 @@ function App() {
   const [chartCoinData, setChartCoinData] = useState({
     labels: [],
     datasets: [{
-      label: "PRICE",
-      backgroundColor: ["rgba(119, 234, 239, 1)"],
-      borderColor: ["rgba(234, 162, 222, 1)"],
+      label: "PRICE (USD)",
+      backgroundColor: "white",
+      borderColor: ["rgba(46, 186, 198)"],
       data: []
     }]
   })
@@ -24,6 +24,11 @@ function App() {
         'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
         'X-RapidAPI-Host': process.env.REACT_APP_API_HOST
       }
+    }
+
+    if (!symbol && !timeframe) {
+      alert("You must enter a symbol and a timeframe!")
+      return 
     }
 
     fetch(url, options)
@@ -70,13 +75,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Simplistic Crypto Search</h1>
-      <p> * All searches in USD *</p>
-        <label> Enter Coin Symbol: <input value={symbol} type="text" onChange={handleCoinSearch} />
+      <h1>CRYTPO PRICE SEARCH</h1>
+        <label> ENTER SYMBOL: <input value={symbol} type="text" onChange={handleCoinSearch} />
           <br />
         </label>
         <br />
-        <label> Enter Time Frame in Days: <input value={timeframe} type="text" onChange={handleTimeframeSearch} />
+        <label> ENTER TIMEFRAME (DAYS): <input value={timeframe} type="text" onChange={handleTimeframeSearch} />
           <br />
         </label>
         <br />
